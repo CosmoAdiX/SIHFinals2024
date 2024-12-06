@@ -68,7 +68,7 @@ class CustomCrypto:
             decrypted_message = decryptor.update(encrypted) + decryptor.finalize()
             decrypted = json.loads(decrypted_message.decode('utf-8'))
 
-            # Check time validity (5 minutes)
+            # Check time validity (30 minutes)
             decrypted_time = datetime.fromisoformat(decrypted['time'])
             if datetime.now() - decrypted_time > timedelta(minutes=30):
                 raise Exception(" Data has expired")
