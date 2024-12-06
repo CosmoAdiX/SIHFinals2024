@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureChain Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #64ffda;
+            --background-color: #f0f4f8;
+            --text-color: #1a2b4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Section Styles */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            padding-top: 100px;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #home {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a2b4a 100%);
+            color: white;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .services, .solutions {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .service, .solution {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: scale(0.95);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .service:hover, .solution:hover {
+            transform: scale(1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon, .solution-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+
+        .contact-form button {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .services, .solutions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="/api/placeholder/50/50" alt="SecureChain Logo">
+                SecureChain
+            </div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#blockchain">Blockchain</a></li>
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="container">
+            <div class="hero-content">
+                <h1>Securing Your Digital Frontier</h1>
+                <p>Cutting-edge Cybersecurity and Blockchain Solutions for the Modern Enterprise</p>
+            </div>
+        </section>
+
+        <section id="services" class="container">
+            <h2>Cybersecurity Services</h2>
+            <div class="services">
+                <div class="service">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Threat Detection</h3>
+                    <p>Advanced threat detection and real-time monitoring to protect your digital assets.</p>
+                </div>
+                <div class="service">
+                    <div class="service-icon">🔒</div>
+                    <h3>Penetration Testing</h3>
+                    <p>Comprehensive security assessments to identify and mitigate potential vulnerabilities.</p>
+                </div>
+                <div class="service">
+                    <div class="service-icon">🌐</div>
+                    <h3>Network Security</h3>
+                    <p>End-to-end network protection with cutting-edge security protocols.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="blockchain" class="container">
+            <h2>Blockchain Solutions</h2>
+            <div class="services">
+                <div class="service">
+                    <div class="service-icon">⛓️</div>
+                    <h3>Smart Contract Audit</h3>
+                    <p>Comprehensive smart contract review and security verification.</p>
+                </div>
+                <div class="service">
+                    <div class="service-icon">💼</div>
+                    <h3>Enterprise Blockchain</h3>
+                    <p>Custom blockchain solutions tailored to your business needs.</p>
+                </div>
+                <div class="service">
+                    <div class="service-icon">🔐</div>
+                    <h3>Decentralized Security</h3>
+                    <p>Implementing robust security measures for decentralized applications.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solutions" class="container">
+            <h2>Integrated Solutions</h2>
+            <div class="solutions">
+                <div class="solution">
+                    <div class="solution-icon">🚀</div>
+                    <h3>Cyber-Blockchain Integration</h3>
+                    <p>Seamless security solutions combining cybersecurity and blockchain technologies.</p>
+                </div>
+                <div class="solution">
+                    <div class="solution-icon">📊</div>
+                    <h3>Risk Management</h3>
+                    <p>Comprehensive risk assessment and mitigation strategies for digital infrastructure.</p>
+                </div>
+                <div class="solution">
+                    <div class="solution-icon">🔍</div>
+                    <h3>Compliance & Governance</h3>
+                    <p>Ensuring regulatory compliance and robust governance frameworks.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>Contact SecureChain</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Security Inquiry" rows="5" required></textarea>
+                <button type="submit">Send Inquiry</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SecureChain Solutions. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animation
+        const sections = document.querySelectorAll('section');
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
