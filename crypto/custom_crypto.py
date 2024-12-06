@@ -1,15 +1,16 @@
 import os
 import json
 import base64
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes # type: ignore
-from cryptography.hazmat.primitives import padding # type: ignore
+from datetime import datetime, timedelta
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes  # type: ignore
+from cryptography.hazmat.primitives import padding  # type: ignore
 from utils.key_manager import KeyManager
 
 class CustomCrypto:
     def __init__(self, key):
         self.key = key
 
-    def encrypt(self, message):
+    def encrypt(self, from_value, to_value):
         try:
             # Generate IV and salt
             iv = os.urandom(16)
@@ -22,6 +23,14 @@ class CustomCrypto:
             cipher = Cipher(algorithms.AES(derived_key), modes.GCM(iv))
             encryptor = cipher.encryptor()
             
+            # Combine message components
+            current_time = datetime.now().isoformat()  # ISO 8601 format
+            message = json.dumps({
+                'from': from_value,
+                'to': to_value,
+                'time': current_time
+            })
+
             # Encrypt the message
             encrypted_data = encryptor.update(message.encode()) + encryptor.finalize()
             
@@ -56,8 +65,14 @@ class CustomCrypto:
             decryptor = cipher.decryptor()
             
             # Decrypt
-            decrypted = decryptor.update(encrypted) + decryptor.finalize()
-            
-            return decrypted.decode('utf-8')
+            decrypted_message = decryptor.update(encrypted) + decryptor.finalize()
+            decrypted = json.loads(decrypted_message.decode('utf-8'))
+
+            # Check time validity (5 minutes)
+            decrypted_time = datetime.fromisoformat(decrypted['time'])
+            if datetime.now() - decrypted_time > timedelta(minutes=30):
+                raise Exception(" Data has expired")
+
+            return decrypted
         except Exception as e:
             raise Exception(f"Decryption failed: {str(e)}")
