@@ -1,12 +1,13 @@
-import { Float, Html, Loader, MeshTransmissionMaterial, Scroll, ScrollControls, Sparkles, Stars, Text } from "@react-three/drei";
+import { Float, Html, Loader, MeshReflectorMaterial, MeshTransmissionMaterial, Scroll, ScrollControls, Sparkles, Stars, Text } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState } from "react";
 import { ExperienceV1 } from "../Components/ExperienceV1";
 import { Iphone } from "../Components/IphoneLog";
 import { Navbar } from "../Components/NavBar";
 import { EthereumLogo } from "../Components/EthLogo";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { Bloom, EffectComposer, Noise } from "@react-three/postprocessing";
 import Airnt from "./assets/fonts/Airnt.otf"
+import { BlendFunction } from "postprocessing";
 
 function App() {
   return (
@@ -15,13 +16,13 @@ function App() {
         <Canvas shadows camera={{ position: [0, 0, 5], fov: 50 }}>
           <color attach="background" args={["#ef745c"]} />
           {/* <Stars radius={40} factor={2} depth={50}speed={2} /> */}
-          <Sparkles count={500} size={2} scale={9} color="#fff0f3" />
+          
           <Suspense>
+            <Sparkles count={500} size={2} scale={9} color="#fff0f3" />
             <ExperienceV1 />
             <Text anchorX='center' letterSpacing={0.07} maxWidth={2} anchorY='middle' position={[-2.2,0,-1]} castShadow receiveShadow font={Airnt}>
               Team CodeMon
-              
-              <MeshTransmissionMaterial transmission={0.8889} />
+              <meshStandardMaterial color='#e63946' emissive toneMapped={false} />
             </Text>
             
             {/* <mesh castShadow rotation={[1,1,1]}>
@@ -39,7 +40,8 @@ function App() {
               </Scroll>
             </ScrollControls>
             <EffectComposer>
-              <Bloom mipmapBlur luminanceThreshold={1} radius={0.45} />
+              <Bloom luminanceThreshold={0.5} mipmapBlur />
+              <Noise opacity={0.52} premultiply blendFunction={BlendFunction.ADD} />
             </EffectComposer>
           </Suspense>
           

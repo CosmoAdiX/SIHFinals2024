@@ -5,7 +5,7 @@ export const ExperienceV1 = () => {
         <>
             {/* <OrbitControls /> */}
             <SoftShadows size={10} focus={0.8} samples={15} />
-            <Environment preset="city" blur={0.1} />
+            <Environment preset="city" blur={1} />
             <directionalLight
                 position={[15, 15, 15]}
                 intensity={20}
